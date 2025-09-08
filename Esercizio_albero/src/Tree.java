@@ -10,17 +10,23 @@ public class Tree<T extends Comparable<T>> {
     public void add(T v){
         Node <T> n = new  Node<>(v);
 
-        if (root==null) {root = n; return;}
-
+        if (root==null) {
+            root = n; return;
+        }
+        Node <T>tmp=root;
         while (true) {
-            Node <T>tmp=root;
+            
             if (v.compareTo(tmp.getValue())>=0) {
-                if (tmp.getRight()==null){tmp.setRight(tmp); break; }{
-                    tmp = tmp.getRight();
+                if (tmp.getRight()==null){
+                    tmp.setRight(n); break; 
                 }else{
-                    if (tmp.getLeft()==null){tmp.setLeft(n); break;} {
-                        tmp = tmp.getLeft();
-                    }
+                    tmp = tmp.getRight();
+                }
+            }else{
+                if (tmp.getLeft()==null){
+                    tmp.setLeft(n); break;
+                }else {
+                    tmp = tmp.getLeft();
                 }
             }    
         }
@@ -31,7 +37,7 @@ public class Tree<T extends Comparable<T>> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         visita(root,sb);
-        return sb;
+        return sb.toString();
     }
     public void visita(Node<T> n, StringBuilder s){
         if (n==null) return; 
